@@ -1,0 +1,2 @@
+# This project uses only Python standard library modules.
+# Kept as an explicit dependency manifest for tooling/workflows.
