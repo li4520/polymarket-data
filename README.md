@@ -78,3 +78,29 @@ Optional auth env vars:
 ## Runbook
 Detailed operational checklist lives in:
 - `tasks/polymarket-data-capture-runbook.md`
+
+## Offline Backtest Simulation (Analysis Only)
+This repo also includes an **offline** backtest simulator that reads recorded ticks plus recorded outcomes and simulates a conservative strategy. It never places real trades.
+
+Run with defaults:
+```bash
+python analyze_simulation.py
+```
+
+Example with custom parameters:
+```bash
+python analyze_simulation.py --stake 10 --fee-rate 0.02 --high-conf 0.65 --low-conf 0.35 --early-time-sec 480 --spread-max 0.10 --dedupe-by mtime --verbose
+```
+
+Outputs:
+- `results/trades.csv`
+- `results/summary.json`
+
+Note: `analyze_simulation.py` requires `pandas` and `numpy` (unlike the recorder script).
+
+## Making This Repo Public (Privacy/Security)
+- This repo does **not** store API keys. Optional auth is provided via `PM_GAMMA_AUTH_TOKEN` / `PM_CLOB_AUTH_TOKEN` (env vars) or CLI flags.
+- Recorded data (`data/`) and analysis outputs (`results/`) are gitignored by default.
+- Before flipping the repo public, do a quick local scan:
+  - `git ls-files | rg -i '(\\.env|secret|token|password|pem|p12|private)'`
+  - `rg -n -S '(BEGIN .*PRIVATE KEY|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{36})' .`
