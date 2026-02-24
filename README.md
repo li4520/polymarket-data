@@ -97,10 +97,3 @@ Outputs:
 - `results/summary.json`
 
 Note: `analyze_simulation.py` requires `pandas` and `numpy` (unlike the recorder script).
-
-## Making This Repo Public (Privacy/Security)
-- This repo does **not** store API keys. Optional auth is provided via `PM_GAMMA_AUTH_TOKEN` / `PM_CLOB_AUTH_TOKEN` (env vars) or CLI flags.
-- Recorded data (`data/`) and analysis outputs (`results/`) are gitignored by default.
-- Before flipping the repo public, do a quick local scan:
-  - `git ls-files | rg -i '(\\.env|secret|token|password|pem|p12|private)'`
-  - `rg -n -S '(BEGIN .*PRIVATE KEY|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{36})' .`
